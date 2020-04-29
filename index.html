@@ -3,7 +3,7 @@
 <head>
 <style>
 body{
-    background: linear-gradient(#212529 60%,#d8d8d8 0);
+	background: linear-gradient(#212529 60%,#d8d8d8 0);
     background-repeat: no-repeat;
     background-attachment: fixed;
     font-family: "product_regular",Arial,sans-serif!important;
@@ -24,7 +24,7 @@ body{
       </div>
       <div id='box2' class='hidden'>
           <div class='backArrow' style='margin-bottom:15px;cursor:pointer'>
-            <a onclick="showBox1();"><img src='https://legendconf.herokuapp.com/ar.png' style='width:20px'/></a>
+            <a onclick="showBox1();"><img src='ar.jpg' style='width:20px'/></a>
           </div>
           <div class="form-group">
           <input required="" class="form-control form-control-lg" id="lroomname" name="name" placeholder="Enter your name" type="text" value="">
@@ -50,6 +50,7 @@ body{
  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
  <script>
  var key = "NA";
+ localStorage.clear();
  function showBox2(){
 	key = "create";
     $("#box1").addClass("hidden");
