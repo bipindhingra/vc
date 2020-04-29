@@ -577,3 +577,18 @@ blockquote.inline {
     border-radius: 3px;
     box-shadow: 2px 2px rgb(182, 170, 170);
 }
+
+#containertop {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+#leftThing {
+  width: 25%;
+}
+#content {
+  width: 50%;
+}
+#rightThing {
+  width: 25%;
+}
