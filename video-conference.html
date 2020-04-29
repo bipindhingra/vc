@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>WebRTC Video Conferencing</title>
+        <title>Video Conferencing</title>
 
         <script>
             if(!location.hash.replace('#', '').length) {
@@ -14,12 +14,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <link rel="author" type="text/html" href="https://plus.google.com/+MuazKhan">
-        <meta name="author" content="Muaz Khan">
+        <meta name="author" content="Mohnish Pal">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
         <meta name="title" content="Video Conferencing" />
-        <meta name="description" content="Video Conferencing using WebRTC." />
-        <meta name="keywords" content="WebRTC, Video Conferencing, Demo, Example, Experiment" />
+        <meta name="description" content="Video Conferencing." />
+        <meta name="keywords" content="Video Conferencing" />
 
         <link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="roomdailog.css">
@@ -123,18 +123,18 @@
                   </div>
 				  <div id="divjoin" class='col-md-2'>
 						<table id="rooms-list"></table>
-                   </div>  
-                  
-					
-									   
+                   </div>  			   
            </div>
-              <div class='col-md-12'>
-                          <div class='block' style='background-color:white;width:550px;height:400px;margin:auto'>
-							<div id="videos-container" align="center"></div>
-                           </div>
-                   </div>   
-         
         </div>
+		
+		 <div class='col-md-12'>
+			  <div class='block' style='background-color:white;width:550px;height:400px;margin:auto'>
+				<div id="videos-container" align="center"></div>
+			   </div>
+        </div>   
+		
+		
+		
 		     <div id="popup1" class="overlay" style="display: none;">
 				<div class="popup">
 					<h2>Share Room</h2>
@@ -210,7 +210,8 @@
                         var mediaElement = getMediaElement(media.video, {
                             width:150,
 							<!-- (videosContainer_child.clientWidth / 2) - 50, -->
-                            buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider']
+                            buttons: ['mute-audio', 'mute-video', 'full-screen']
+							<!-- , 'volume-slider' -->
                         });
                         mediaElement.id = media.stream.streamid;
                         videosContainer_child.appendChild(mediaElement);
@@ -298,8 +299,7 @@
                             config.attachStream = stream;
 
                             var mediaElement = getMediaElement(video, {
-								title: 'pal',
-                                width: 550,
+								width: 550,
                                 buttons: ['mute-audio', 'mute-video', 'full-screen']
 								<!-- 'volume-slider' -->
                             });
