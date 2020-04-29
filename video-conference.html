@@ -115,7 +115,7 @@
            <div class='row'>    
                    <div class='col-md-2'>
 					<a href="#popup1">
-                       <img src='sh.png' style='width:40px'/>
+                       <img src='http://www.netlegends.in/sh.png' style='width:40px'/>
 					</a>
                    </div>  
                    <div class='col-md-8'>
@@ -298,8 +298,10 @@
                             config.attachStream = stream;
 
                             var mediaElement = getMediaElement(video, {
+								title: 'pal',
                                 width: 550,
-                                buttons: ['mute-audio', 'mute-video', 'full-screen', 'volume-slider']
+                                buttons: ['mute-audio', 'mute-video', 'full-screen']
+								<!-- 'volume-slider' -->
                             });
                             mediaElement.toggle('mute-audio');
                             videosContainer.appendChild(mediaElement);
