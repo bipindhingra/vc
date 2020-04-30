@@ -5,8 +5,8 @@ html {
 }
 
 body {
-	background: url(http://www.netlegends.in/bg.png) repeat;
-	/* background: url(https://legendconf.herokuapp.com/bg2.png) repeat; */
+	/* background: url(http://www.netlegends.in/bg.png) repeat; */
+	background: #0205a1;
     font-family: "Segoe UI", "Open Sans", "Ubuntu", "Calibri", "Corbel", Tahoma, Sans-Serif;
     font-size: 1.2em;
     line-height: 1.5em;

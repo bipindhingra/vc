@@ -91,7 +91,28 @@
 		background: gray;
 
       }
-        </style>
+	  
+	  .loader {
+		  border: 8px solid #3498db;
+		  border-radius: 50%;
+		  border-top: 8px solid #ffffff;
+		  width: 50px;
+		  height: 50px;
+		  -webkit-animation: spin 2s linear infinite; /* Safari */
+		  animation: spin 2s linear infinite;
+		}
+
+		/* Safari */
+		@-webkit-keyframes spin {
+		  0% { -webkit-transform: rotate(0deg); }
+		  100% { -webkit-transform: rotate(360deg); }
+		}
+
+		@keyframes spin {
+		  0% { transform: rotate(0deg); }
+		  100% { transform: rotate(360deg); }
+		}
+	    </style>
         <script>
             document.createElement('article');
             document.createElement('footer');
@@ -108,19 +129,20 @@
         <script src="https://www.webrtc-experiment.com/video-conferencing/conference.js"> </script>
     </head>
 
-    <body >
+    <body style="background-color: #0205a1;">
 
        <div id='containertop' style='margin-bottom:10px'>
-                   <div id="leftThing">
+                   <div id="leftThing" style="margin-top:20px; margin-left:20px; visibility:hidden;">
 					<a align="center" id="ashare" onclick="showd()">
-                       <img src='http://www.netlegends.in/sh.png' style='width:40px' align="center"/>
+                       <img src='http://www.netlegends.in/sh.png' style='width:30px' align="center"/>
 					</a>
                    </div>  
                    <div id="content">
                         <h3 id="title" style='text-align:center; font-size:30px; color:white;'></h3>
                   </div>
-				  <div id="divjoin" id="rightThing">
+				  <div id="divjoin" id="rightThing" style="margin-top:20px;">
 						<table id="rooms-list"></table>
+						<div id="dload" class="loader" ></div>
                    </div> 
         </div>
 		
@@ -186,7 +208,7 @@
             <script>
 				var room_name =localStorage.getItem("room_name");
 				var room_key =localStorage.getItem("key");
-				document.getElementById("title").innerHTML="Welcome : "+room_name;
+				document.getElementById("dload").style.display = "black";
 				var videosContainer_child = document.getElementById('videos-container-child') || document.body;
 				
                 var config = {
@@ -241,13 +263,13 @@
                         var tr = document.createElement('tr');
                         tr.innerHTML = '<td><button class="join">Join</button></td>';
                         roomsList.appendChild(tr);
-						document.getElementById("ashare").style.display = "none";
-						if(room.roomName !== null){
-							document.getElementById("title").innerHTML="Welcome : "+room.roomName;
+						if(room.roomName !== "null"){
+							document.getElementById("title").innerHTML="Meeting hosted by : "+room.roomName;
 						}else{
-							document.getElementById("title").innerHTML="Welcome : ";
+							document.getElementById("title").innerHTML="Meeting hosted by : ";
 						}
-
+						document.getElementById("leftThing").style.visibility = "hidden";
+						document.getElementById("dload").style.display = "none";
 
                         var joinRoomButton = tr.querySelector('.join');
                         joinRoomButton.setAttribute('data-broadcaster', room.broadcaster);
@@ -290,6 +312,9 @@
                             roomName: room_name
 							<!-- (document.getElementById('conference-name') || { }).value || 'Anonymous' -->
                         });
+						document.getElementById("title").innerHTML="Meeting hosted by : "+room_name;
+						document.getElementById("leftThing").style.visibility = "visible";
+						document.getElementById("dload").style.display = "none";
                     }, function() {
                         btnSetupNewRoom.disabled = document.getElementById('conference-name').disabled = false;
                     });
@@ -314,7 +339,7 @@
                         video: video,
                         onsuccess: function(stream) {
                             config.attachStream = stream;
-
+							<!-- document.getElementById("title").innerHTML="Meeting hosted by : "+room_name; -->
                             var mediaElement = getMediaElement(video, {
 								title: 'Mohnish Pal',
 								width: 550,
@@ -323,7 +348,7 @@
                             });
                             mediaElement.toggle('mute-audio');
                             videosContainer.appendChild(mediaElement);
-							document.getElementById("ashare").style.display = "block";
+							
 
                             callback && callback();
                         },
