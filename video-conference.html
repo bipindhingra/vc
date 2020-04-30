@@ -19,8 +19,9 @@
         <meta name="title" content="Video Conferencing" />
         <meta name="description" content="Video Conferencing." />
         <meta name="keywords" content="Video Conferencing" />
-
+		
         <link rel="stylesheet" href="style.css">
+		  <link rel="stylesheet" href="sharemodel.css">
         <link href='http://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/fontawesome.min.css' rel="stylesheet"/>
       <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"  crossorigin="anonymous">
         <style>
@@ -107,12 +108,12 @@
         <script src="https://www.webrtc-experiment.com/video-conferencing/conference.js"> </script>
     </head>
 
-    <body>
+    <body >
 
        <div id='containertop' style='margin-bottom:10px'>
                    <div id="leftThing">
-					<a href="#popup1">
-                       <img src='http://www.netlegends.in/sh.png' style='width:40px'/>
+					<a align="center" id="ashare" onclick="showd()">
+                       <img src='http://www.netlegends.in/sh.png' style='width:40px' align="center"/>
 					</a>
                    </div>  
                    <div id="content">
@@ -129,19 +130,32 @@
 			   </div>
         </div>   
 		
+
+	<!-- The Modal -->
+	<div id="myModal" class="modal" style="display: none;">
+
+	  <!-- Modal content -->
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <span class="close">&times;</span>
+		  <h2>Share Room</h2>
+		</div>
+		<div class="modal-body">
+			<p>Share below link for join this room.</p>
+			<h5 id ="roomdetails"></h5>	
+		 
+		</div>
+	  </div>
+	</div>
+
 		
-		
-		     <div id="popup1" class="overlay" style="display: none;">
-				<div class="popup">
-					<h2>Share Room</h2>
-					<a class="close" href="#">&times;</a>
-					<div class="content">
-					<h5 id ="roomdetails"></h5>	
-					</div>
-				</div>
-			</div>
-			
-        <div class="container horizontal-scrollable"> 
+		<div id="dialog" title="Share Room" style="display: none;">
+			<h5 id ="roomdetails"></h5>	
+			<!-- <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p> -->
+		</div>
+
+		     
+			<div class="container horizontal-scrollable"> 
                 <div class="row text-center"> 
 					<div class="col-md-2" style='height:150px' id="videos-container-child"></div>
                 </div> 
@@ -204,9 +218,10 @@
                     },
                     onRemoteStream: function(media) {
                         var mediaElement = getMediaElement(media.video, {
+							title: 'Mohnish Pal',
                             width:150,
 							<!-- (videosContainer_child.clientWidth / 2) - 50, -->
-                            buttons: ['mute-audio', 'mute-video', 'full-screen']
+                            buttons: ['mute-audio', 'mute-video', 'full-screen', 'stop']
 							<!-- , 'volume-slider' -->
                         });
                         mediaElement.id = media.stream.streamid;
@@ -226,7 +241,13 @@
                         var tr = document.createElement('tr');
                         tr.innerHTML = '<td><button class="join">Join</button></td>';
                         roomsList.appendChild(tr);
-						document.getElementById("title").innerHTML="Welcome : "+room.roomName+" join";
+						document.getElementById("ashare").style.display = "none";
+						if(room.roomName !== null){
+							document.getElementById("title").innerHTML="Welcome : "+room.roomName;
+						}else{
+							document.getElementById("title").innerHTML="Welcome : ";
+						}
+
 
                         var joinRoomButton = tr.querySelector('.join');
                         joinRoomButton.setAttribute('data-broadcaster', room.broadcaster);
@@ -295,12 +316,14 @@
                             config.attachStream = stream;
 
                             var mediaElement = getMediaElement(video, {
+								title: 'Mohnish Pal',
 								width: 550,
-                                buttons: ['mute-audio', 'mute-video', 'full-screen']
+                                buttons: ['mute-audio', 'mute-video', 'full-screen', 'stop']
 								<!-- 'volume-slider' -->
                             });
                             mediaElement.toggle('mute-audio');
                             videosContainer.appendChild(mediaElement);
+							document.getElementById("ashare").style.display = "block";
 
                             callback && callback();
                         },
@@ -374,10 +397,34 @@
 				}
                 window.onresize = scaleVideos;
 				
-				function ShowRoomDetails(){
-				
-				
-				}
+			
+				 function showd(){
+					// Get the modal
+					var modal = document.getElementById("myModal");
+					modal.style.display ="block"
+					// Get the button that opens the modal
+					var btn = document.getElementById("ashare");
+
+					// Get the <span> element that closes the modal
+					var span = document.getElementsByClassName("close")[0];
+
+					// When the user clicks the button, open the modal 
+					btn.onclick = function() {
+					  modal.style.display = "block";
+					}
+
+					// When the user clicks on <span> (x), close the modal
+					span.onclick = function() {
+					  modal.style.display = "none";
+					}
+
+					// When the user clicks anywhere outside of the modal, close it
+					window.onclick = function(event) {
+					  if (event.target == modal) {
+						modal.style.display = "none";
+					  }
+					}
+				  } ;
 
             </script>
 
